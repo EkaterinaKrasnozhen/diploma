@@ -30,10 +30,16 @@ class Client(models.Model):
 class Country(models.Model):
     name = models.CharField(max_length=50) 
     
+    def __str__(self):
+        return f'{self.name}'
+    
     
 class City(models.Model):
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     city_name = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return f'{self.country, self.city_name}'
     
     def __repr__(self):
         return f'City({self.country}, {self.city_name})'
