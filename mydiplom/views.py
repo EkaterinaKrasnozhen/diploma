@@ -2,13 +2,24 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import logging
 from .forms import ClientForm, Hotel_Form, City_Form, Country_Form, TourForm
-from .models import Client, Hotel, City, Country
+from .models import Client, Hotel, City, Country, Tour
 
 logger = logging.getLogger(__name__)
 
 
 def index(request):
     return HttpResponse('Hello, world!')
+
+
+def start(request):
+    my_list = ['Красножен', 'Екатерина', 'Леонидовна']
+    my_dict = {
+        'группа': 'программист python',
+        'поток': '2023',
+        'программа': 'Университет 2025',
+    }
+    context = {'my_list': my_list, 'my_dict': my_dict}
+    return render(request, 'mydiplom/start.html', context)
 
 
 def add_client_form(request):
@@ -48,11 +59,11 @@ def add_tour_form(request):
             transfer = form.cleaned_data['transfer']
             extra_insurance = form.cleaned_data['extra_insurance']
             extra_service = form.cleaned_data['extra_service']
-            hotel = Hotel(client=client, hotel=hotel, start_date=start_date,\
+            tour = Tour(client=client, hotel=hotel, start_date=start_date,\
                         nights=nights, meal=meal, room=room, transfer=transfer,\
                         extra_insurance=extra_insurance, extra_service=extra_service)
-            hotel.save()
-            message = 'Отель сохранён'
+            tour.save()
+            message = 'Тур сохранён'
     else:
         form = TourForm()
         message = 'Заполните форму'

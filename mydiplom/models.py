@@ -59,6 +59,9 @@ class Hotel(models.Model):
     def __repr__(self):
         return f'Hotel({self.hotel_name}, {self.hotel_star})'
     
+    def __str__(self):
+        return f'Hotel({self.hotel_name}, {self.hotel_star})'
+    
      
 class Tour(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
