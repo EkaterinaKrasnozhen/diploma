@@ -31,4 +31,4 @@ python -m venv .venv
  - запустить приложение:  
  python manage.py runserver
 
- - перейти по ссылке localhost
+ - перейти по ссылке localhost в терминале
