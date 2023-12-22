@@ -1,3 +1,4 @@
+import datetime
 from django import forms
 from .models import Client, Hotel, City, Country
 
@@ -5,7 +6,8 @@ from .models import Client, Hotel, City, Country
 class ClientForm(forms.Form):
     name = forms.CharField(max_length=50)
     surname = forms.CharField(max_length=50)
-    birth = forms.DateField()
+    birth = forms.DateField(initial=datetime.date.today,
+                                widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))#forms.DateField(initial=datetime.date.today)#forms.DateField()
     passport = forms.CharField(max_length=10)
     expirity_pass = forms.DateField()
     phone = forms.CharField(max_length=50)
@@ -15,7 +17,8 @@ class ClientForm(forms.Form):
 class TourForm(forms.Form):
     client = forms.ModelChoiceField(queryset= Client.objects.all())
     hotel = forms.ModelChoiceField(queryset= Hotel.objects.all())
-    start_date = forms.DateField()
+    start_date = forms.DateField(initial=datetime.date.today,
+                                widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))#forms.DateField()
     nights = forms.IntegerField()    
     meal = forms.CharField(max_length=5)
     room = forms.CharField(max_length=20)
@@ -37,3 +40,9 @@ class City_Form(forms.Form):
     
 class Country_Form(forms.Form):
     name = forms.CharField(max_length=100) 
+    
+
+class Tour_By_Client_Id_Form(forms.Form):
+    client = forms.ModelChoiceField(label="Клиенты", queryset=Client.objects.all())
+    
+    

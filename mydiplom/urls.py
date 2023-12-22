@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import add_client_form, index, add_hotel_form, add_city_form, add_country_form, add_tour_form, start
+from .views import add_client_form, add_hotel_form, add_city_form, add_country_form, add_tour_form, start, tours
 
 urlpatterns = [
     path('', start, name='start'), # по пустому пути ''
@@ -8,4 +8,5 @@ urlpatterns = [
     path('mydiplom/add/city/', add_city_form, name='city_form'),
     path('mydiplom/add/country/', add_country_form, name='country_form'),
     path('mydiplom/add/tour/', add_tour_form, name='tour_form'),
+    path('mydiplom/get/tours', tours, name='tours'),
 ]

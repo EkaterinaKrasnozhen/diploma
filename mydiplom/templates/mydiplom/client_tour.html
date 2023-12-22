@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Поездки клиента: {{ client.name}} {{client.surname}}</h2>
+    <table>
+        {% for tour in tours %}
+            <tr>
+                <td><a> Отель:{{ tour.hotel }} Начало поездки:{{ tour.start_date }} Кол-во ночей:{{ tour.nights }}</a>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
