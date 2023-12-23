@@ -7,11 +7,18 @@ class ClientForm(forms.Form):
     name = forms.CharField(max_length=50)
     surname = forms.CharField(max_length=50)
     birth = forms.DateField(initial=datetime.date.today,
-                                widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))#forms.DateField(initial=datetime.date.today)#forms.DateField()
+                                widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
     passport = forms.CharField(max_length=10)
-    expirity_pass = forms.DateField()
+    expirity_pass = forms.DateField(initial=datetime.date.today,
+                                widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
     phone = forms.CharField(max_length=50)
     email = forms.EmailField(max_length=50)
+    
+    def clean_date(self):
+        expirity_pass = self.cleaned_data['expirity_pass']
+        if expirity_pass < datetime.date.today():
+            raise forms.ValidationError('Срок действия паспорта не подходит')
+        return expirity_pass
     
     
 class TourForm(forms.Form):
@@ -44,5 +51,12 @@ class Country_Form(forms.Form):
 
 class Tour_By_Client_Id_Form(forms.Form):
     client = forms.ModelChoiceField(label="Клиенты", queryset=Client.objects.all())
+    
+
+class Find_ClientForm(forms.Form):
+    name = forms.CharField(max_length=50)
+    surname = forms.CharField(max_length=50)
+    birth = forms.DateField(initial=datetime.date.today,
+                                widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
     
     

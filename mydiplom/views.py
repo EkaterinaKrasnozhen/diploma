@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 import logging
 from django import forms
-from .forms import ClientForm, Hotel_Form, City_Form, Country_Form, TourForm, Tour_By_Client_Id_Form
+from .forms import ClientForm, Hotel_Form, City_Form, Country_Form, TourForm, Tour_By_Client_Id_Form, Find_ClientForm
 from .models import Client, Hotel, City, Country, Tour
 
 logger = logging.getLogger(__name__)
@@ -144,5 +144,19 @@ def tours(request):
         return render(request, 'mydiplom/client_tour.html', context)            
     else:
         form = Tour_By_Client_Id_Form()
+        return render(request, 'mydiplom/form.html', {'form': form})
+    
+    
+def find_client(request):
+    """
+        get client by birthdate
+    """
+    if request.method == 'POST':
+        birth = request.POST.get('birth')
+        client = Client.objects.filter(birth=birth).first() 
+        context = {'client': client}
+        return render(request, 'mydiplom/client.html', context)            
+    else:
+        form = Find_ClientForm()
         return render(request, 'mydiplom/form.html', {'form': form})
         

@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 
 
@@ -25,6 +26,9 @@ class Client(models.Model):
     
     def get_birth(self):
         return self.birth
+    
+    def passport_is_valid(self):
+        return self.expirity_pass > datetime.date.today()
   
   
 class Country(models.Model):

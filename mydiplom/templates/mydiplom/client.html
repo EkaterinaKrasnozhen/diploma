@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %} Клиент{% endblock %}
+
+{% block content %}
+    <h3>ID {{ client.id }}</h3>  
+    <h3>Имя {{ client.name }}</h3>
+    <h3>Фамилия {{ client.surname }}</h3>
+    <h3>Паспорт {{ client.passport }}</h3>
+    <h3>Срок действия {{ client.expirity_pass }}</h3>
+    <h3>Телефон {{ client.phone }}</h3>
+    <h3> Мейл {{ client.email }}</h3>
+{% endblock %}
